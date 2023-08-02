@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { FlipTilt } from '../lib/index';
 
-const frontImage = './test-front.webp';
+const frontImage = 'test-front.webp';
 const backImage = 'test-back.webp';
 
 const Image = ({ side }: { side: 'front' | 'back' }) => (

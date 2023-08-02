@@ -122,7 +122,26 @@ The components's ref object contains the following properties in addition to [`r
 
 <table aria-hidden="false"><thead><tr><th><span>Name</span></th><th><span>Description</span></th><th><span>Parameters</span></th></tr><tbody><tr><td><span>isFlipped</span></td><td><div><span>Returns whether the element is flipped or not</span></div><div><code><span>() => boolean</span></code></div></td><td><span>-</span></td></tr><tr><td><span>flip</span></td><td><div><span>Animates/Flips the component without re-rendering it.</span></div><div><code><span>() => Promise&lt;void&gt;</span></code></div></td><td><span>-</span></td></tr></tbody></table>
 
-### Basic Ref Usage
+### Ref Usage (ref function)
+
+```ts
+import { FlipTilt, FlipTiltRef } from 'react-next-tilt';
+
+const MyComponent = () => {
+  return (
+    <FlipTilt
+      ref={(ref) => {
+        if (ref) {
+          //do something with the ref
+        }
+      }}
+      ...
+    />
+  );
+};
+```
+
+### Ref Usage (useEffect)
 
 ```js
 import { useRef, useEffect } from 'react';
@@ -160,9 +179,9 @@ const MyComponent = () => {
     <FlipTilt
       ref={async (r) => {
         if (r) {
-          console.log(`isFlipped = ${r.isFlipped}`);
+          console.log(`isFlipped = ${r.isFlipped()}`);
           await r.flip();
-          console.log(`isFlipped = ${r.isFlipped}`);
+          console.log(`isFlipped = ${r.isFlipped()}`);
           ref.current = r;
         }
       }}
