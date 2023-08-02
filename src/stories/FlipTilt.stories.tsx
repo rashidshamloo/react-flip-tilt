@@ -48,25 +48,6 @@ const meta: Meta<typeof FlipTilt> = {
     onTouchEnd: { table: { disable: true } },
     onBlur: { table: { disable: true } },
     onKeyDown: { table: { disable: true } },
-    width: { control: { type: 'number' } },
-    height: { control: { type: 'number' } },
-    lineGlareColor: { control: { type: 'color' } },
-    spotGlareColor: { control: { type: 'color' } },
-    lineGlareWidthPercent: {
-      control: { type: 'range', min: 0, max: 50, step: 1 },
-    },
-    tiltMaxAngleX: {
-      control: { type: 'range', min: 0, max: 90, step: 1 },
-    },
-    tiltMaxAngleY: {
-      control: { type: 'range', min: 0, max: 90, step: 1 },
-    },
-    gyroMaxAngleX: {
-      control: { type: 'range', min: 0, max: 90, step: 1 },
-    },
-    gyroMaxAngleY: {
-      control: { type: 'range', min: 0, max: 90, step: 1 },
-    },
   },
 };
 
