@@ -125,7 +125,7 @@ The components's ref object contains the following properties in addition to [`r
 ### Ref Usage (ref function)
 
 ```ts
-import { FlipTilt } from 'react-next-tilt';
+import { FlipTilt } from 'react-flip-tilt';
 
 const MyComponent = () => {
   return (
