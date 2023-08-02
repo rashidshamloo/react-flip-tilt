@@ -70,7 +70,7 @@ import { FlipTilt } from 'react-flip-tilt';
 ```
 
 ## Usage
-You can set the the `front`/`back` properties to either an image source as `string` or an element/component
+You can set the `front`/`back` properties to either an image source as `string` or an element/component
 
 ### Image Source
 
@@ -118,7 +118,7 @@ The component has the following events/callbacks in addition to [`react-next-til
 
 ## Ref
 
-The components's ref object contains the following properties in addition to [`react-next-tilt`](https://www.npmjs.com/package/react-next-tilt#ref) ref properties:
+The component's ref object contains the following properties in addition to [`react-next-tilt`](https://www.npmjs.com/package/react-next-tilt#ref) ref properties:
 
 <table aria-hidden="false"><thead><tr><th><span>Name</span></th><th><span>Description</span></th><th><span>Parameters</span></th></tr><tbody><tr><td><span>isFlipped</span></td><td><div><span>Returns whether the element is flipped or not</span></div><div><code><span>() => boolean</span></code></div></td><td><span>-</span></td></tr><tr><td><span>flip</span></td><td><div><span>Animates/Flips the component without re-rendering it.</span></div><div><code><span>() => Promise&lt;void&gt;</span></code></div></td><td><span>-</span></td></tr></tbody></table>
 
