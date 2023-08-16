@@ -19,12 +19,12 @@ import { motion, useMotionValue, animate, Transition } from 'framer-motion';
 import { Tilt, TiltRef } from 'react-next-tilt';
 
 // utility
-import { getHTMLElement } from './utility/utility';
+import { getHTMLElement, isDeepEqual } from './utility/utility';
 
 // types
 import { FlipTiltProps, FlipTiltRef } from './types/types';
 
-export const FlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
+const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
   (
     {
       //
@@ -223,41 +223,44 @@ export const FlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
         else return element;
       }
     );
-    const TiltWrapper = memo(({ children }: PropsWithChildren) => {
-      return (
-        <motion.div
-          ref={motionDivRef}
-          data-testid={testIdEnable ? 'motion' : undefined}
-          style={{
-            display: 'grid',
-            gridAutoRows: '100%',
-            width: '100%',
-            height: '100%',
-            borderRadius,
-            rotateX: isVertical ? rotate : undefined,
-            rotateY: !isVertical ? rotate : undefined,
-            transformStyle: 'preserve-3d',
-          }}
-        >
-          <div
-            data-testid={testIdEnable ? 'front-wrapper' : undefined}
+    const TiltWrapper = useCallback(
+      ({ children }: PropsWithChildren) => {
+        return (
+          <motion.div
+            ref={motionDivRef}
+            data-testid={testIdEnable ? 'motion' : undefined}
             style={{
+              display: 'grid',
+              gridAutoRows: '100%',
               width: '100%',
               height: '100%',
-              gridArea: '1 / 1 / 1 / 1',
               borderRadius,
-              overflow: typeof front === 'string' ? 'hidden' : undefined,
-              backfaceVisibility: 'hidden',
+              rotateX: isVertical ? rotate : undefined,
+              rotateY: !isVertical ? rotate : undefined,
               transformStyle: 'preserve-3d',
-              transform: isVertical ? 'rotateX(180deg)' : 'rotateY(180deg)',
             }}
           >
-            <FlipElement element={front} side="front" />
-          </div>
-          {children}
-        </motion.div>
-      );
-    });
+            <div
+              data-testid={testIdEnable ? 'front-wrapper' : undefined}
+              style={{
+                width: '100%',
+                height: '100%',
+                gridArea: '1 / 1 / 1 / 1',
+                borderRadius,
+                overflow: typeof front === 'string' ? 'hidden' : undefined,
+                backfaceVisibility: 'hidden',
+                transformStyle: 'preserve-3d',
+                transform: isVertical ? 'rotateX(180deg)' : 'rotateY(180deg)',
+              }}
+            >
+              <FlipElement element={front} side="front" />
+            </div>
+            {children}
+          </motion.div>
+        );
+      },
+      [FlipElement, borderRadius, front, isVertical, rotate, testIdEnable]
+    );
 
     // events
 
@@ -498,6 +501,10 @@ export const FlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
       </Tilt>
     );
   }
+);
+
+export const FlipTilt = memo(ReactFlipTilt, (prevProps, nextProps) =>
+  isDeepEqual(prevProps, nextProps)
 );
 
 FlipTilt.displayName = 'FlipTilt';

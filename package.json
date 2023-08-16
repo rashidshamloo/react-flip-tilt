@@ -1,7 +1,7 @@
 {
   "name": "react-flip-tilt",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Performant Customizable React Component Providing the Flip-Tilt Effect",
   "main": "./dist/react-flip-tilt.umd.cjs",
   "module": "./dist/react-flip-tilt.js",
@@ -66,10 +66,10 @@
   },
   "homepage": "https://github.com/rashidshamloo/react-flip-tilt#readme",
   "dependencies": {
-    "react-next-tilt": "^0.0.2"
+    "react-next-tilt": "^0.0.3"
   },
   "peerDependencies": {
-    "framer-motion": ">= 10.0 || ^10.12.16",
+    "framer-motion": ">= 10.0 || ^10.15.2",
     "react": ">= 16.8 || ^18.2.0",
     "react-dom": ">= 16.8 || ^18.2.0"
   },
@@ -94,7 +94,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "eslint-plugin-storybook": "^0.6.12",
-    "framer-motion": "^10.12.16",
+    "framer-motion": "^10.15.2",
     "gh-pages": "^5.0.0",
     "path": "^0.12.7",
     "prop-types": "^15.8.1",

@@ -75,19 +75,19 @@ You can set the `front`/`back` properties to either an image source as `string` 
 ### Image Source
 
 ```js
-<FlipTilt front="/front.webp" back="/back.webp" />;
+<FlipTilt front="/front.webp" back="/back.webp" />
 ```
 
 ### Element/Component
 
 ```js
-<FlipTilt front={<div>...</div>} back={<MyComponent />} />;
+<FlipTilt front={<div>...</div>} back={<MyComponent />} />
 ```
 
 ### Mixture of Both
 
 ```js
-<FlipTilt front="/front.webp" back={<MyComponent />} />;
+<FlipTilt front="/front.webp" back={<MyComponent />} />
 ```
 ### Parallax Effect
 
