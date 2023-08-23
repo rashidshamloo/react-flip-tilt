@@ -108,18 +108,6 @@ export interface FlipTiltProps extends TiltProps {
    */
   borderStyle?: Property.BorderStyle;
   /**
-   * CSS `box-shadow` property applied to the back image/element
-   *
-   * @default '0 0 1rem rgba(0,0,0,0.4)'
-   *
-   * @example '0.5rem 0.5rem 0.5rem rgba(0,0,0,0.3)'
-   *
-   * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow MDN - box-shadow}
-   *
-   * @see {@link http://localhost:6006/?path=/story/fliptilt-react-flip-tilt--box-shadow Storybook}
-   */
-  boxShadow?: string;
-  /**
    * Mass of the element in `framer-motion`'s `spring` animation. Higher values will result in more lethargic movement.
    *
    * @default 0.5

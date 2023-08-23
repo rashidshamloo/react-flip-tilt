@@ -56,9 +56,10 @@ describe('<FlipTilt />', () => {
       .should('have.attr', 'style')
       .should('contain', 'border-style: dashed');
   });
-  it('Testing boxShadow ("1px 1px 1px black")', () => {
-    cy.mount(<MockFlipTilt boxShadow="1px 1px 1px black" />);
-    cy.get('[data-testid="back-wrapper"]')
+  it('Testing shadow ("1px 1px 1px black")', () => {
+    cy.mount(<MockFlipTilt shadow="1px 1px 1px black" />);
+    cy.get('[data-testid="container"]').trigger('mouseover', 'center');
+    cy.get('[data-testid="tilt"]')
       .should('have.attr', 'style')
       .should('contain', 'black')
       .should('contain', '1px 1px 1px');

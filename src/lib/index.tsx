@@ -35,7 +35,7 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
       borderWidth = '2px',
       borderColor = 'white',
       borderStyle = 'solid',
-      boxShadow = '0 0 1rem rgba(0,0,0,0.4)',
+      shadowEnable = true,
       mass = 0.5,
       stiffness = 120,
       flipped,
@@ -478,6 +478,7 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
         fullPageListening={fullPageListening}
         controlElement={controlElement}
         controlElementOnly={controlElementOnly}
+        shadowEnable={shadowEnable}
         {...props}
       >
         <div
@@ -490,7 +491,6 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
             borderWidth,
             borderStyle,
             borderColor,
-            boxShadow,
             overflow: typeof back === 'string' ? 'hidden' : undefined,
             backfaceVisibility: 'hidden',
             transformStyle: 'preserve-3d',

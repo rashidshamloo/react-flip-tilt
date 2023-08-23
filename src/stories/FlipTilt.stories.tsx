@@ -117,19 +117,6 @@ export const Border: Story = {
   },
 };
 
-export const BoxShadow: Story = {
-  parameters: {
-    controls: {
-      include: 'boxShadow',
-    },
-  },
-  args: {
-    boxShadow: '0 0 1.5rem yellow',
-    front: frontImage,
-    back: backImage,
-  },
-};
-
 export const MassStiffness: Story = {
   name: 'Mass / Stiffness',
   parameters: {
