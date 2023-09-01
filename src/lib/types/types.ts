@@ -149,3 +149,11 @@ export interface FlipTiltProps extends TiltProps {
   onFlipBack?: (element: HTMLDivElement) => void;
   onKeyDown?: KeyboardEventHandler<HTMLDivElement>;
 }
+
+// exporting react-next-tilt types
+export type {
+  Angle,
+  SpotGlarePosition,
+  LineGlareHoverPosition,
+  LineGlareDirection,
+} from 'react-next-tilt';

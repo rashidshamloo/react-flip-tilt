@@ -325,7 +325,7 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
 
       // if controlElement is not an array, convert it to one
       let controlElementArray: Array<
-        HTMLElement | RefObject<HTMLElement> | Document
+        HTMLElement | RefObject<unknown> | Document
       >;
       if (fullPageListening || !controlElement)
         controlElementArray = [document];
