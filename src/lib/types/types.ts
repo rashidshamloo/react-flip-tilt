@@ -156,4 +156,5 @@ export type {
   SpotGlarePosition,
   LineGlareHoverPosition,
   LineGlareDirection,
+  ShadowType,
 } from 'react-next-tilt';
