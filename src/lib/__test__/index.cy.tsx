@@ -70,6 +70,20 @@ describe('<FlipTilt />', () => {
       .should('have.attr', 'style')
       .should('contain', 'color: green');
   });
+  describe('Testing type', () => {
+    it('Testing type="tilt", spot glare style should contain "radial-gradient(white, transparent 100%)"', () => {
+      cy.mount(<MockFlipTilt type="tilt" />);
+      cy.get('[data-testid="spot-glare"]')
+        .should('have.attr', 'style')
+        .should('contain', 'radial-gradient(white, transparent 100%)');
+    });
+    it('Testing type="parallax", spot glare style should contain "radial-gradient(white, transparent 50%)"', () => {
+      cy.mount(<MockFlipTilt type="parallax" />);
+      cy.get('[data-testid="spot-glare"]')
+        .should('have.attr', 'style')
+        .should('contain', 'radial-gradient(white, transparent 50%)');
+    });
+  });
   describe('Testing flip functionality', () => {
     describe('Normal', () => {
       it('direction = "horizontal"', () => {

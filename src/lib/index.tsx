@@ -18,8 +18,11 @@ import { motion, useMotionValue, animate, Transition } from 'framer-motion';
 // tilt
 import { Tilt, TiltRef } from 'react-next-tilt';
 
+// parallax
+import { Parallax } from 'react-next-parallax';
+
 // utility
-import { getHTMLElement, isDeepEqual } from './utility/utility';
+import { getHTMLElement } from './utility/utility';
 
 // types
 import { FlipTiltProps, FlipTiltRef } from './types/types';
@@ -41,7 +44,9 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
       flipped,
       flipReverse = false,
       flipBackReverse = false,
+      type = 'tilt',
       disabled = false,
+      overflowHiddenEnable = false,
       testIdEnable,
       fullPageListening,
       controlElement,
@@ -70,6 +75,7 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
     const attachEvents =
       !fullPageListening &&
       (!controlElement || (controlElement && !controlElementOnly));
+    const Component = type === 'tilt' ? Tilt : Parallax;
 
     // ref
     const tiltRef = useRef<TiltRef>(null);
@@ -103,6 +109,13 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
 
       updateWillChange();
 
+      // disable pointer events on motion.div so it doesn't
+      // re-trigger mouseEnter/mouseLeave when animating
+      requestAnimationFrame(() => {
+        if (motionDivRef.current)
+          motionDivRef.current.style.pointerEvents = 'none';
+      });
+
       // flip
       if (!isFlipped.current) {
         isFlipped.current = true;
@@ -110,9 +123,8 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
         if (onFlip) onFlip(tiltRef.current.element);
 
         // if flipBackReverse is false, jump to rotateInitialValue
-        if (!flipBackReverse) {
+        if (!flipBackReverse && rotate.get() !== rotateInitialValue)
           rotate.jump(rotateInitialValue);
-        }
 
         await animate(rotate, 0, transition);
       }
@@ -138,7 +150,16 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
         );
       }
 
-      updateWillChange(false);
+      // if no animation is running (a new animation hasn't been started
+      // asynchronously), remove will-change and re-enable mouse events
+      if (!rotate.isAnimating()) {
+        updateWillChange(false);
+        // re-enable pointer-events
+        requestAnimationFrame(() => {
+          if (motionDivRef.current)
+            motionDivRef.current.style.pointerEvents = '';
+        });
+      }
     }, [
       updateWillChange,
       onFlip,
@@ -147,6 +168,7 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
       rotate,
       transition,
       rotateInitialValue,
+      tiltRef,
     ]);
 
     // returns the value of isFlipped
@@ -247,7 +269,10 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
                 height: '100%',
                 gridArea: '1 / 1 / 1 / 1',
                 borderRadius,
-                overflow: typeof front === 'string' ? 'hidden' : undefined,
+                overflow:
+                  typeof front === 'string' || overflowHiddenEnable
+                    ? 'hidden'
+                    : undefined,
                 backfaceVisibility: 'hidden',
                 transformStyle: 'preserve-3d',
                 transform: isVertical ? 'rotateX(180deg)' : 'rotateY(180deg)',
@@ -259,7 +284,15 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
           </motion.div>
         );
       },
-      [FlipElement, borderRadius, front, isVertical, rotate, testIdEnable]
+      [
+        FlipElement,
+        borderRadius,
+        front,
+        isVertical,
+        rotate,
+        testIdEnable,
+        overflowHiddenEnable,
+      ]
     );
 
     // events
@@ -381,7 +414,7 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
     ]);
 
     return (
-      <Tilt
+      <Component
         ref={tiltRef}
         onMouseEnter={
           attachEvents
@@ -479,6 +512,9 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
         controlElement={controlElement}
         controlElementOnly={controlElementOnly}
         shadowEnable={shadowEnable}
+        overflowHiddenEnable={
+          type === 'parallax' ? overflowHiddenEnable : undefined
+        }
         {...props}
       >
         <div
@@ -491,21 +527,22 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
             borderWidth,
             borderStyle,
             borderColor,
-            overflow: typeof back === 'string' ? 'hidden' : undefined,
+            overflow:
+              typeof back === 'string' || overflowHiddenEnable
+                ? 'hidden'
+                : undefined,
             backfaceVisibility: 'hidden',
             transformStyle: 'preserve-3d',
           }}
         >
           <FlipElement element={back} side="back" />
         </div>
-      </Tilt>
+      </Component>
     );
   }
 );
 
-export const FlipTilt = memo(ReactFlipTilt, (prevProps, nextProps) =>
-  isDeepEqual(prevProps, nextProps)
-);
+export const FlipTilt = memo(ReactFlipTilt);
 
 FlipTilt.displayName = 'FlipTilt';
 

@@ -5,10 +5,13 @@ import { ReactNode, KeyboardEventHandler } from 'react';
 import { Property } from 'csstype';
 
 // react-next-tilt
-import { TiltProps, TiltRef } from 'react-next-tilt';
+import { TiltRef } from 'react-next-tilt';
+
+// react-next-parallax
+import { ParallaxProps, ParallaxRef } from 'react-next-parallax';
 
 // ref
-export interface FlipTiltRef extends TiltRef {
+export interface FlipTiltRef extends TiltRef, ParallaxRef {
   /**
    * Flips the component
    */
@@ -20,7 +23,7 @@ export interface FlipTiltRef extends TiltRef {
 }
 
 // props
-export interface FlipTiltProps extends TiltProps {
+export interface FlipTiltProps extends ParallaxProps {
   /**
    * Front image/element
    *
@@ -51,6 +54,8 @@ export interface FlipTiltProps extends TiltProps {
    * @example 'horizontal', 'vertical'
    *
    * @see {@link http://localhost:6006/?path=/story/fliptilt-react-flip-tilt--direction Storybook}
+   *
+   * @see {@link https://rashidshamloo.github.io/react-flip-tilt_demo/flip-direction Flip Direction Demo}
    */
   direction?: 'horizontal' | 'vertical';
   /**
@@ -60,7 +65,7 @@ export interface FlipTiltProps extends TiltProps {
    *
    * @see {@link http://localhost:6006/?path=/story/fliptilt-react-flip-tilt--flip-reverse Storybook}
    *
-   * @see {@link https://rashidshamloo.github.io/react-flip-tilt_demo/parallax Parallax Demo}
+   * @see {@link https://rashidshamloo.github.io/react-flip-tilt_demo/flip-direction Flip Direction Demo}
    */
   flipReverse?: boolean;
   /**
@@ -70,7 +75,7 @@ export interface FlipTiltProps extends TiltProps {
    *
    * @see {@link http://localhost:6006/?path=/story/fliptilt-react-flip-tilt--flip-reverse Storybook}
    *
-   * @see {@link https://rashidshamloo.github.io/react-flip-tilt_demo/parallax Parallax Demo}
+   * @see {@link https://rashidshamloo.github.io/react-flip-tilt_demo/flip-direction Flip Direction Demo}
    */
   flipBackReverse?: boolean;
   /**
@@ -131,6 +136,20 @@ export interface FlipTiltProps extends TiltProps {
    * @see {@link http://localhost:6006/?path=/story/fliptilt-react-flip-tilt--flipped Storybook}
    */
   flipped?: boolean;
+  /**
+   * Determines the type of the component
+   *
+   * `'tilt'`: `react-next-tilt`
+   *
+   * `'parallax'`: `react-next-parallax`
+   *
+   * @note Passing `react-next-parallax` props to the component only works if `type` is set to `'parallax'`
+   *
+   * @default 'tilt'
+   *
+   * @see {@link https://www.npmjs.com/package/react-next-tilt `react-next-tilt`} - {@link https://www.npmjs.com/package/react-next-parallax `react-next-parallax`}
+   */
+  type?: 'tilt' | 'parallax';
   /**
    * Callback function that is called with the container element when the component flips and the back side is visible
    *
