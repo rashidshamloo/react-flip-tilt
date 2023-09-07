@@ -58,7 +58,7 @@
   - Control Element
   - Parallax ready
   - and more
-- Plus all of the features of <a href="https://www.npmjs.com/package/react-parallax-parallax#features">react-next-parallax</a> like:
+- Plus all of the features of <a href="https://www.npmjs.com/package/react-next-parallax#features">react-next-parallax</a> like:
   - Parallax effect
   - Animations based on tilt angle
   - Multiple animation modes
