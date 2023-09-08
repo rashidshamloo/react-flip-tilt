@@ -85,6 +85,38 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
     const rotateInitialValue = flipped ? 0 : flipReverse ? 180 : -180;
     const rotate = useMotionValue(rotateInitialValue);
 
+    /*
+     * for whom it may concern:
+     * i tried using a conditional prop type:
+     *
+     * | ({type?: 'tilt'} & FlipTiltProps & TiltProps)
+     * | ({type: 'parallax'} & FlipTiltProps & ParallaxProps)
+     *
+     * (with FlipTiltProps containing just the unique props and not extending other interfaces)
+     *
+     * and while it's supposed to work in theory, i got the
+     * "Expression produces a union type that is too complex to represent."
+     * error, so this is a temporary workaround.
+     *
+     * see: https://github.com/microsoft/TypeScript/issues/53234
+     */
+    // delete 'parallax' props if type is 'tilt'
+    if (type !== 'parallax') {
+      delete props.animationMode;
+      delete props.animationReverse;
+      delete props.offsetMultiplier;
+      delete props.opacityMultiplier;
+      delete props.scaleMultiplier;
+      delete props.rotationMultiplier;
+      delete props.skewMultiplier;
+    }
+    const overflow =
+      type === 'tilt'
+        ? {}
+        : {
+            overflowHiddenEnable,
+          };
+
     // functions/values
 
     // transition setting
@@ -512,9 +544,7 @@ const ReactFlipTilt = forwardRef<FlipTiltRef, FlipTiltProps>(
         controlElement={controlElement}
         controlElementOnly={controlElementOnly}
         shadowEnable={shadowEnable}
-        overflowHiddenEnable={
-          type === 'parallax' ? overflowHiddenEnable : undefined
-        }
+        {...overflow}
         {...props}
       >
         <div
