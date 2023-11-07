@@ -67,8 +67,8 @@
   },
   "homepage": "https://github.com/rashidshamloo/react-flip-tilt#readme",
   "dependencies": {
-    "react-next-parallax": "^0.0.4",
-    "react-next-tilt": "^0.3.1"
+    "react-next-parallax": "^0.1.0",
+    "react-next-tilt": "^0.4.3"
   },
   "peerDependencies": {
     "framer-motion": ">= 10.0 || ^10.15.2",
